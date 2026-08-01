@@ -1,0 +1,4 @@
+Today
+
+- Improved the bot backend therefore giving a better bot responsivness
+- Memory Battle Command Created

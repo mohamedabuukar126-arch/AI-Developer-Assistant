@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Memory</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="chat-container">
+
+    <div class="chat-header">
+        🧠 AI Memory
+    </div>
+
+    <div class="chat-box">
+
+        {% if memories %}
+
+            {% for key, value in memories %}
+
+                <div class="message ai-message">
+                    <strong>{{ key }}</strong><br>
+                    {{ value }}
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="message ai-message">
+                No memories saved yet.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <a href="/" class="sidebar-button" style="margin:20px;">
+        ← Back to Chat
+    </a>
+
+</div>
+
+</body>
+</html>

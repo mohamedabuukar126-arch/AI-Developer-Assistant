@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chat History</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <div class="sidebar">
+
+        <h2>🤖 Abuukar AI</h2>
+
+        <a href="/" class="sidebar-button">
+            💬 Chat
+        </a>
+
+        <a href="/memory" class="sidebar-button">
+            🧠 Memory
+        </a>
+
+        <a href="/history" class="sidebar-button">
+            📜 History
+        </a>
+
+        <a href="/settings" class="sidebar-button">
+            ⚙️ Settings
+        </a>
+
+        <a href="/documents" class="sidebar-button">
+            📄 Documents
+        </a>
+
+
+
+    </div>
+
+
+
+    <div class="chat-container">
+
+        <div class="chat-header">
+            📜 Chat History
+        </div>
+
+        <div class="chat-box">
+
+            {% if history %}
+
+                {% for message in history %}
+
+                    {% if message["role"] == "user" %}
+
+                        <div class="message user-message">
+                            {{ message["content"] }}
+                        </div>
+
+                    {% elif message["role"] == "assistant" %}
+
+                        <div class="message ai-message">
+                            {{ message["content"] }}
+                        </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="message ai-message">
+                    No chat history yet.
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

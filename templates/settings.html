@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Settings</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+
+    <div class="sidebar">
+
+        <h2>🤖 Abuukar AI</h2>
+
+
+        <a href="/" class="sidebar-button">
+            💬 Chat
+        </a>
+
+
+        <a href="/memory" class="sidebar-button">
+            🧠 Memory
+        </a>
+
+
+        <a href="/history" class="sidebar-button">
+            📜 History
+        </a>
+
+
+        <a href="/documents" class="sidebar-button">
+            📄 Documents
+        </a>
+
+
+        <div class="sidebar-button">
+
+            {% if memory_enabled == "true" %}
+
+                🟢 Memory Enabled
+
+            {% else %}
+
+                🔴 Memory Disabled
+
+            {% endif %}
+
+        </div>
+
+
+        <a href="/settings" class="sidebar-button">
+            ⚙️ Settings
+        </a>
+
+
+    </div>
+
+
+
+
+
+    <div class="chat-container">
+
+
+        <div class="chat-header">
+            ⚙️ Settings
+        </div>
+
+
+
+        <div class="chat-box">
+
+
+
+            <div class="settings-card">
+
+
+                <h3>🧠 AI Memory</h3>
+
+
+                <p>
+                    Allow the AI to save useful information about you.
+                </p>
+
+
+
+                <form action="/toggle_memory" method="POST">
+
+
+                    <button class="settings-button" type="submit">
+
+
+                        {% if memory_enabled == "true" %}
+
+                            🟢 Memory: ON
+
+                        {% else %}
+
+                            🔴 Memory: OFF
+
+                        {% endif %}
+
+
+                    </button>
+
+
+                </form>
+
+
+            </div>
+
+
+
+
+
+
+            <div class="settings-card">
+
+
+                <h3>🤖 AI Model</h3>
+
+
+                <p>
+                    Llama 3.2
+                </p>
+
+
+            </div>
+
+
+
+
+
+
+            <div class="settings-card">
+
+
+                <h3>🌙 Theme</h3>
+
+
+                <p>
+                    Dark Mode
+                </p>
+
+
+            </div>
+
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

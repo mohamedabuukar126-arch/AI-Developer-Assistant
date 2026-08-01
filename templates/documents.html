@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Documents</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+
+    <div class="sidebar">
+
+        <h2>🤖 Abuukar AI</h2>
+
+
+        <a href="/" class="sidebar-button">
+            💬 Chat
+        </a>
+
+
+        <a href="/memory" class="sidebar-button">
+            🧠 Memory
+        </a>
+
+
+        <a href="/history" class="sidebar-button">
+            📜 History
+        </a>
+
+
+        <a href="/documents" class="sidebar-button">
+            📄 Documents
+        </a>
+
+
+        <a href="/settings" class="sidebar-button">
+            ⚙️ Settings
+        </a>
+
+
+    </div>
+
+
+
+
+    <div class="chat-container">
+
+
+        <div class="chat-header">
+            📄 Documents
+        </div>
+
+
+
+        <div class="chat-box">
+
+
+            {% if documents %}
+
+
+                {% for document in documents %}
+
+
+                    <div class="message ai-message">
+
+                        📄 {{ document[0] }}
+
+                    </div>
+
+
+                {% endfor %}
+
+
+
+            {% else %}
+
+
+                <div class="message ai-message">
+
+                    No documents uploaded.
+
+                </div>
+
+
+            {% endif %}
+
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

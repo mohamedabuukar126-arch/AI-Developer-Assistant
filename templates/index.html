@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>AI Developer Assistant</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="app-container">
+
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+
+        <h2>💻 AI Developer Assistant</h2>
+
+
+
+        <a href="/" class="sidebar-button">
+            💬 Chat
+        </a>
+
+
+
+        <a href="/memory" class="sidebar-button">
+            🧠 Memory
+        </a>
+
+
+
+        <a href="/history" class="sidebar-button">
+            📜 History
+        </a>
+
+
+
+        <a href="/documents" class="sidebar-button">
+            📄 Documents
+        </a>
+
+
+
+        <a href="/settings" class="sidebar-button">
+            ⚙️ Settings
+        </a>
+
+        <a href="/clear_all" class="clear-button">
+        🗑 Clear All
+        </a>
+        
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- Chat Area -->
+
+
+    <div class="chat-container">
+
+
+
+        <div class="chat-header">
+
+            💻 AI Developer Assistant
+
+        </div>
+
+
+
+
+
+
+        <div class="chat-box">
+
+
+
+            {% if chat_history %}
+
+
+
+                {% for message in chat_history %}
+
+
+
+                    {% if message.role == "user" %}
+
+
+
+                        <div class="message user-message">
+
+                            {{ message.content }}
+
+                        </div>
+
+
+
+                    {% else %}
+
+
+
+                        <div class="message ai-message">
+
+                            {{ message.content }}
+
+                        </div>
+
+
+
+                    {% endif %}
+
+
+
+                {% endfor %}
+
+
+
+            {% else %}
+
+
+
+                <div class="message ai-message">
+
+                    Hello 👋 I am your AI Developer Assistant. Ask me about code, debugging, or programming.
+
+                </div>
+
+
+
+            {% endif %}
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+        <!-- ChatGPT Input -->
+
+
+        <form action="/" method="POST" enctype="multipart/form-data" class="input-area">
+
+
+
+
+
+            <!-- Upload button -->
+
+
+            <label for="file-upload" class="plus-button">
+
+                +
+
+            </label>
+
+
+
+            <input
+
+                id="file-upload"
+
+                type="file"
+
+                name="file"
+
+                accept=".pdf,.docx,.txt,.py,.js,.html,.css,.json"
+                
+                hidden
+
+            >
+
+            <!-- Message input -->
+
+
+            <textarea
+                name="message"
+                placeholder="Ask AI..."
+                rows="1"
+                maxlength="2000"
+                required
+            ></textarea>
+
+            <button type="button" class="mic-button">
+                🎤
+            </button>
+
+
+            <!-- Send button -->
+
+
+            <button type="submit" class="send-button">
+
+                ↑
+
+            </button>
+
+
+
+
+        </form>
+
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+
+const chatBox = document.querySelector(".chat-box");
+
+
+if(chatBox){
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+}
+
+
+// File upload indicator
+
+const fileInput = document.getElementById("file-upload");
+
+const uploadButton = document.querySelector(".plus-button");
+
+
+if(fileInput){
+
+    fileInput.addEventListener("change", function(){
+
+        if(fileInput.files.length > 0){
+
+            uploadButton.textContent = "✓";
+
+        }
+
+        else{
+
+            uploadButton.textContent = "+";
+
+        }
+
+    });
+
+}
+
+
+
+// Voice input
+
+const micButton = document.querySelector(".mic-button");
+const textarea = document.querySelector(".input-area textarea");
+
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+
+if (micButton && textarea && SpeechRecognition) {
+
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = "en-US";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+
+    let isListening = false;
+
+
+    micButton.addEventListener("click", function () {
+
+        if (isListening) {
+            recognition.stop();
+            return;
+        }
+
+
+        console.log("MIC START");
+
+        isListening = true;
+        micButton.textContent = "🔴";
+
+        recognition.start();
+
+    });
+
+
+    recognition.onstart = function () {
+
+        console.log("LISTENING");
+
+    };
+
+
+    recognition.onresult = function(event) {
+
+        const text = event.results[0][0].transcript;
+
+        console.log("HEARD:", text);
+
+        textarea.value += " " + text;
+
+    };
+
+
+    recognition.onend = function() {
+
+        console.log("ENDED");
+
+        isListening = false;
+        micButton.textContent = "🎤";
+
+    };
+
+
+    recognition.onerror = function(event) {
+
+        console.log("VOICE ERROR:", event.error);
+
+        isListening = false;
+        micButton.textContent = "🎤";
+
+    };
+
+
+}
+
+
+
+</script>
+
+
+
+
+
+</body>
+
+</html>
