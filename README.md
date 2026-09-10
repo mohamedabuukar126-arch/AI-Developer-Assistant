@@ -1,4 +1,5 @@
-﻿AI Developer Assistant
+
+#AI Developer Assistant
 
 An AI-powered developer assistant built with Python and Flask.
 
