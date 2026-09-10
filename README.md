@@ -1,6 +1,5 @@
 
-#AI Developer Assistant
-
+# AI Developer Assistant
 An AI-powered developer assistant built with Python and Flask.
 
 I built this project to create a tool that can help with coding, files, conversations, and developer tasks. It includes AI chat, conversation history, file uploads, memory, document handling, and voice input.
